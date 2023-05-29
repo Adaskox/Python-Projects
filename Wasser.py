@@ -6,15 +6,16 @@ customtkinter.set_default_color_theme('dark-blue')
 
 # Box
 root = customtkinter.CTk()
-root.geometry('500x350')
+root.geometry('500x800')
 
 # Function inside it
-def add_water(index):
-    fill_color = canvas.itemcget(rectangles[index], 'fill')
+def add_water():
+    active_rectangle[0] = (active_rectangle[0] - 1) % len(rectangles)
+    fill_color = canvas.itemcget(rectangles[active_rectangle[0]], 'fill')
     if fill_color == 'grey':
-        canvas.itemconfig(rectangles[index], fill='blue')
+        canvas.itemconfig(rectangles[active_rectangle[0]], fill='blue')
     else:
-        canvas.itemconfig(rectangles[index], fill='grey')
+        canvas.itemconfig(rectangles[active_rectangle[0]], fill='grey')
 
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill='both', expand=True)
@@ -23,18 +24,20 @@ frame.pack(pady=20, padx=60, fill='both', expand=True)
 label = customtkinter.CTkLabel(master=frame, text='Wasser', font=('Arial', 24))
 label.pack(pady=12, padx=10)
 
-canvas = customtkinter.CTkCanvas(root, width=500, height=350)
+canvas = customtkinter.CTkCanvas(root, width=200, height=500)
 canvas.pack(pady=20)
 
 # Split canvas into 14 rectangles - 250ml of water each
 rectangles = []
 for i in range(14):
-    x1 = i * 500 // 14
-    x2 = (i + 1) * 500 // 14
-    rectangle = canvas.create_rectangle(x1, 0, x2, 350, fill='grey')
+    y1 = i * 350 // 14
+    y2 = (i + 1) * 350 // 14
+    rectangle = canvas.create_rectangle(0, y1, 200, y2, fill='grey')
     rectangles.append(rectangle)
 
-button = customtkinter.CTkButton(master=frame, text='Add Water', command=lambda: [add_water(i) for i in range(14)])
+active_rectangle = [len(rectangles) - 0]  # Start from the last rectangle index
+
+button = customtkinter.CTkButton(master=frame, text='Add Water', command=add_water)
 button.pack(pady=12, padx=10)
 
 checkbox = customtkinter.CTkCheckBox(master=frame, text='Send notifications')
