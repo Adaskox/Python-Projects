@@ -14,6 +14,11 @@ def add_water():
         canvas.itemconfig(rectangles[active_rectangle[0]], fill='DeepSkyBlue3')
         active_rectangle[0] += 1
 
+def subtract_water():
+    if active_rectangle[0] > 0:
+        active_rectangle[0] -= 1
+        canvas.itemconfig(rectangles[active_rectangle[0]], fill='grey')
+
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill='both', expand=True)
 
@@ -43,6 +48,9 @@ for i in range(len(rectangles)):
 active_rectangle = [0]  # Start from the first rectangle index
 
 button = customtkinter.CTkButton(master=frame, text='Add Water', command=add_water)
+button.pack(pady=12, padx=10)
+
+button = customtkinter.CTkButton(master=frame, text='Remove Water', command=subtract_water)
 button.pack(pady=12, padx=10)
 
 checkbox = customtkinter.CTkCheckBox(master=frame, text='Send notifications')
