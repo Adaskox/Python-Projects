@@ -6,7 +6,8 @@ customtkinter.set_default_color_theme('dark-blue')
 
 # Box
 root = customtkinter.CTk()
-root.geometry('500x650')
+root.minsize(300, 700)
+root.geometry('300x700')
 
 # Function inside it
 def add_water():
@@ -55,5 +56,8 @@ button.pack(pady=12, padx=10)
 
 checkbox = customtkinter.CTkCheckBox(master=frame, text='Send notifications')
 checkbox.pack(pady=12, padx=10)
+
+button = customtkinter.CTkButton(master=frame, text='Apply')
+button.pack(pady=12, padx=10)
 
 root.mainloop()
