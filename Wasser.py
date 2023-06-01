@@ -20,6 +20,32 @@ def subtract_water():
         active_rectangle[0] -= 1
         canvas.itemconfig(rectangles[active_rectangle[0]], fill='grey')
 
+def open_settings_window():
+    settings_window = customtkinter.CTk()
+    settings_window.geometry('300x250')
+    settings_window.title('Settings')
+
+    settings_label = customtkinter.CTkLabel(master=settings_window, text='Settings', font=('Arial', 16))
+    settings_label.pack(pady=20)
+
+    notifications_checkbox = customtkinter.CTkCheckBox(master=settings_window, text='Send notifications', command=None)
+    notifications_checkbox.pack(pady=10)
+
+    startwithwin_checkbox = customtkinter.CTkCheckBox(master=settings_window, text='Start with Windows', command=None)
+    startwithwin_checkbox.pack(pady=10)
+
+    apply_button = customtkinter.CTkButton(master=settings_window, text='Apply', command=None)
+    apply_button.pack(pady=10)
+
+    settings_window.mainloop()
+
+    # After settings window is closed, continue the main application
+    root.focus_set()
+
+def quit():
+    root.quit()
+
+
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill='both', expand=True)
 
@@ -48,16 +74,16 @@ for i in range(len(rectangles)):
 
 active_rectangle = [0]  # Start from the first rectangle index
 
-button = customtkinter.CTkButton(master=frame, text='Add Water', command=add_water)
-button.pack(pady=12, padx=10)
+add_button = customtkinter.CTkButton(master=frame, text='Add Water', command=add_water)
+add_button.pack(pady=12, padx=10)
 
-button = customtkinter.CTkButton(master=frame, text='Remove Water', command=subtract_water)
-button.pack(pady=12, padx=10)
+remove_button = customtkinter.CTkButton(master=frame, text='Remove Water', command=subtract_water)
+remove_button.pack(pady=12, padx=10)
 
-checkbox = customtkinter.CTkCheckBox(master=frame, text='Send notifications')
-checkbox.pack(pady=12, padx=10)
+settings_button = customtkinter.CTkButton(master=frame, text='Settings', command=open_settings_window)
+settings_button.pack(padx=12, pady=10)
 
-button = customtkinter.CTkButton(master=frame, text='Apply')
-button.pack(pady=12, padx=10)
+quit_button = customtkinter.CTkButton(master=frame, text='Quit', command=quit)
+quit_button.pack(padx=12, pady=10)
 
 root.mainloop()
