@@ -1,27 +1,37 @@
-# bot.py
 import os
-
 import discord
 from dotenv import load_dotenv
+from discord.ext import commands
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
-client = discord.Client(intents=discord.Intents.default())
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-@client.event
+
+@bot.event
 async def on_ready():
-    for guild in client.guilds:
-        if guild.name == GUILD:
-            break
-
+    guild = discord.utils.get(bot.guilds, name=GUILD)
     print(
-        f'{client.user} is connected to the following guild:\n'
+        f'{bot.user} is connected to the following guild:\n'
         f'{guild.name}(id: {guild.id})\n'
     )
-
     members = '\n - '.join([member.name for member in guild.members])
     print(f'Guild Members:\n - {members}')
 
-client.run(TOKEN)
+
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+
+    if message.content.lower() == 'hi':
+        response = 'Hi'
+        await message.channel.send(response)
+
+    await bot.process_commands(message)
+
+
+bot.run(TOKEN)
