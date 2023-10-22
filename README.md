@@ -7,6 +7,7 @@ Some of my prjects made using Python
 * ["Calculator" App](#"Calculator"-App)
 * ["Scrapper" App](#"Scrapper"-App)
 * ["Discord_bot" App](#"Discord_bot"-App)
+* ["Block" App](#"Block"-App)
 
 ## General info
 This is a repository of ,Quality of Life' apps, that I am using in my every day life.
@@ -23,3 +24,7 @@ App that scraps through olx in search of offers that interest me. Made using Bea
 
 ## "Discord_bot" App
 Discord bot that is connected with OpenAI API. Responds like ChatGPT would.
+
+## "Block" App
+Script to block youtube and facebook after 2 hours of usage. Made with time, datetime and pygetwindow modules.
+Need to use admin priveleges on the script to make it run.
