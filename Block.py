@@ -1,5 +1,6 @@
 import time
 import pygetwindow as gw
+import datetime
 
 # Title of the YouTube browser window
 youtube_window_title = "YouTube - Google Chrome"  # Adjust the title for your browser
@@ -8,9 +9,22 @@ youtube_window_title = "YouTube - Google Chrome"  # Adjust the title for your br
 total_time_spent = 0
 
 # Write here a code that will reset total time spent every 24h
+day = datetime.date.today()
 
 # Set the time interval for checking (in seconds)
-check_interval = 60  # 5 seconds
+check_interval = 60  # 1 minute
+
+# localhost ip number
+ip = "127.0.0.1"
+
+# Path to hosts file
+hosts = r"C:\Users\Adaskox\Desktop\Programowanie\Projekty\hosts"
+
+# List of blocked websites
+sites = [
+    "www.facebook.com",
+    "www.youtube.com"
+]
 
 while True:
     browser_open = False
@@ -28,6 +42,11 @@ while True:
 
     if total_time_spent >= 120:
         print('stop') # Write here a code, that will block YT after 120min of usage
+
+    # If day of month changes, time resets
+    if day != datetime.date.today():
+        today = datetime.date.today()
+        total_time_spent = 0
 
     # Wait for the specified interval before checking again
     time.sleep(check_interval)
