@@ -9,10 +9,10 @@ def parse_price(price):
 def parse_page(number):
     page = requests.get(f'{URL}&page={number}')
     bs = BeautifulSoup(page.content, 'html.parser')
-    offers = bs.find_all('div', class_='css-oukcj3')
+    offers = bs.find_all('div', class_='css-1sw7q4x')
     #print(offers)
     for offer in offers:
-        footer = offer.find('td', class_='css-veheph er34gjf0')
+        #footer = offer.find('td', class_='css-veheph er34gjf0')
         title_element = offer.find('div', class_='css-u2ayx9')
         if title_element is not None:
             title = title_element.get_text().strip()
@@ -23,5 +23,5 @@ def parse_page(number):
         else:
             print("Title not found for an offer.")
 
-for page in range(1, 26):
+for page in range(1, 5):
     parse_page(page)
