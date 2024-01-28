@@ -20,7 +20,7 @@ def click_on_button(x, y):
     pyautogui.click()
     print(f"Clicked on the button at ({x}, {y})")
 
-# Place your own paths to png's here:
+# Place your own paths to png's here(it's best to make own screenshots of buttons):
 button_image_vortex = r'C:\Users\Adaskox\Desktop\Programowanie\Projekty\NexusAutoDownload\Vortex.png'
 button_image_nexus = r'C:\Users\Adaskox\Desktop\Programowanie\Projekty\NexusAutoDownload\Nexus.png'
 
